@@ -2,10 +2,16 @@
 """
 brand_string_verifier.py — report stray upstream brand strings in user-facing surfaces.
 
-In the edition-overlay SCAFFOLD (this PR) the engine is untouched, so this is REPORT-ONLY: it counts
-occurrences of the upstream brand ("Vibe"/"vibe") in user-facing surfaces (locales + desktop/src)
-and always exits 0. After the rebrand slice (milestone 2) run with --strict to FAIL if any stray
-upstream brand string remains in a rebranded surface.
+This is REPORT-ONLY: it counts occurrences of the upstream brand ("Vibe"/"vibe") in user-facing
+surfaces (locales + desktop/src) and always exits 0 without --strict.
+
+Rebrand FIRST SLICE (this PR) applies the identity layer to the app-shell surfaces only —
+tauri.conf.json productName + identifier, index.html <title> + description, the two src-tauri window
+titles, and the hotkey notification titles. Those surfaces are intentionally OUT of this counter's
+scan set (it scans locales + desktop/src TS/JSX), so a non-zero count here is EXPECTED and healthy:
+it is the backlog of upstream strings (locale catalogs, config.ts upstream URLs) that later, separately
+reviewed rebrand slices will migrate. Run with --strict only once the FULL rebrand is complete to FAIL
+if any stray upstream brand string remains.
 
 Stdlib only. Usage:
   python3 scripts/edition/brand_string_verifier.py [--strict]
@@ -52,7 +58,8 @@ def main():
     if strict and total:
         print("BRAND VERIFY FAIL (--strict): stray upstream brand strings remain.")
         sys.exit(1)
-    print("BRAND VERIFY OK (report-only in the scaffold; use --strict after the rebrand slice).")
+    print("BRAND VERIFY OK (report-only; rebrand first slice done — remaining counts are the expected "
+          "locale/config backlog for later slices; use --strict only after the FULL rebrand).")
 
 
 if __name__ == "__main__":
