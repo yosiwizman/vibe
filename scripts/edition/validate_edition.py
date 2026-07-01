@@ -2,7 +2,7 @@
 """
 validate_edition.py — validate a PrivateNote edition config against editions/_schema/edition.schema.json.
 
-Stdlib only (no pip). Minimal JSON-Schema subset check (required / type / enum / pattern / nested
+Stdlib only (no pip). Minimal JSON-Schema subset check (required / type / pattern / nested
 required) — the same lightweight style used elsewhere in this project. Also enforces the Therapist v1
 safety invariant: features.soap_notes and features.cloud_ai MUST be false.
 

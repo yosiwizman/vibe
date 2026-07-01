@@ -47,9 +47,10 @@ def main():
     ed = os.path.join(base, "edition.json")
     if os.path.exists(ed):
         try:
-            pc = (json.load(open(ed)) or {}).get("privacy_copy", "")
+            with open(ed, encoding="utf-8") as f:
+                pc = (json.load(f) or {}).get("privacy_copy", "")
             scan_text(os.path.relpath(ed, ROOT) + "#privacy_copy", pc, hits)
-        except Exception as exc:  # noqa: BLE001
+        except (OSError, ValueError) as exc:
             print(f"COPY LINT WARN: could not read {ed}: {exc}")
 
     copy_dir = os.path.join(base, "copy")
@@ -59,9 +60,13 @@ def main():
             # Only *.txt are shippable approved-string files; *.md are documentation (not linted).
             if os.path.isfile(p) and name.lower().endswith(".txt"):
                 try:
-                    scan_text(os.path.relpath(p, ROOT), open(p, encoding="utf-8").read(), hits)
-                except Exception:  # noqa: BLE001
-                    pass
+                    with open(p, encoding="utf-8") as f:
+                        text = f.read()
+                except OSError as exc:
+                    # A harmless unreadable non-shippable file is a warning, not a lint failure.
+                    print(f"COPY LINT WARN: skipping unreadable {os.path.relpath(p, ROOT)}: {exc}")
+                    continue
+                scan_text(os.path.relpath(p, ROOT), text, hits)
 
     if hits:
         print("COPY LINT FAIL: forbidden claims in shippable copy:")
