@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "privatenote/editions/_schema/edition.schema.json",
+  "title": "PrivateNote Edition",
+  "description": "Config-only contract for a PrivateNote edition (Therapist first). An edition is pure configuration + assets layered over the untouched Vibe engine. Creating this config does NOT modify the engine or tauri.conf.json; a later, separately-reviewed generator applies build-time identity on a rebrand branch.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["edition_id", "product_name", "bundle_identifier", "deep_link_scheme", "features", "privacy_copy", "model"],
+  "properties": {
+    "edition_id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "product_name": { "type": "string", "minLength": 1 },
+    "bundle_identifier": { "type": "string", "pattern": "^[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)+$" },
+    "deep_link_scheme": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "colors": { "type": "object" },
+    "logo": { "type": ["string", "null"] },
+    "icon": { "type": ["string", "null"] },
+    "prompts_dir": { "type": ["string", "null"] },
+    "vocabulary_dir": { "type": ["string", "null"] },
+    "export_defaults": { "type": "object" },
+    "privacy_copy": { "type": "string", "minLength": 1 },
+    "features": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["soap_notes", "cloud_ai"],
+      "properties": {
+        "soap_notes": { "type": "boolean", "description": "MUST be false for Therapist v1 (medical overlay). Enabling is a later founder gate." },
+        "cloud_ai": { "type": "boolean", "description": "MUST be false for Therapist v1. No audio/text leaves the device." }
+      }
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "sha256"],
+      "properties": {
+        "url": { "type": "string", "pattern": "^(TODO|https?://.+)$", "description": "'TODO' placeholder, or an http(s) URL to the pinned model" },
+        "sha256": { "type": "string", "pattern": "^(TODO|[0-9a-fA-F]{64})$", "description": "'TODO' placeholder, or a 64-character hex SHA256 of the pinned model" }
+      }
+    },
+    "notes": { "type": "string" }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "edition_id": "therapist",
+  "product_name": "PrivateNote Therapist",
+  "bundle_identifier": "com.privatenote.therapist",
+  "deep_link_scheme": "privatenote-therapist",
+  "colors": {},
+  "logo": null,
+  "icon": null,
+  "prompts_dir": "editions/therapist/prompts",
+  "vocabulary_dir": "editions/therapist/vocabulary",
+  "export_defaults": {},
+  "privacy_copy": "Private, offline transcription. Recordings stay on your computer.",
+  "features": {
+    "soap_notes": false,
+    "cloud_ai": false
+  },
+  "model": {
+    "url": "TODO",
+    "sha256": "TODO"
+  },
+  "notes": "Config ONLY. This file does NOT modify the Vibe engine or tauri.conf.json. bundle_identifier / product_name / deep_link_scheme are proposed values a later, separately-reviewed rebrand slice will apply via a generator. bundle_identifier is pending founder confirmation; model url/sha256 are pending the founder's model choice. soap_notes and cloud_ai stay false for Therapist v1 (MEDICAL_OR_COMPLIANCE_BLOCKED overlay)."
+}
