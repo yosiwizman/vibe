@@ -32,8 +32,8 @@
       "additionalProperties": false,
       "required": ["url", "sha256"],
       "properties": {
-        "url": { "type": "string", "description": "pinned model URL; 'TODO' until the founder supplies it" },
-        "sha256": { "type": "string", "description": "pinned SHA256; 'TODO' until the founder supplies it" }
+        "url": { "type": "string", "pattern": "^(TODO|https?://.+)$", "description": "'TODO' placeholder, or an http(s) URL to the pinned model" },
+        "sha256": { "type": "string", "pattern": "^(TODO|[0-9a-fA-F]{64})$", "description": "'TODO' placeholder, or a 64-character hex SHA256 of the pinned model" }
       }
     },
     "notes": { "type": "string" }
