@@ -55,8 +55,10 @@ def check(obj, schema, path="<root>", errs=None):
 def main():
     target = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "editions", "therapist", "edition.json")
     try:
-        schema = json.load(open(SCHEMA))
-        ed = json.load(open(target))
+        with open(SCHEMA, encoding="utf-8") as f:
+            schema = json.load(f)
+        with open(target, encoding="utf-8") as f:
+            ed = json.load(f)
     except Exception as exc:  # noqa: BLE001
         print(f"EDITION VALIDATE FAIL: cannot load ({exc})", file=sys.stderr)
         sys.exit(2)
