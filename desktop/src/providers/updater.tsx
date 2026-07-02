@@ -1,6 +1,6 @@
 import * as dialog from '@tauri-apps/plugin-dialog'
 import * as process from '@tauri-apps/plugin-process'
-import { DownloadEvent, Update, check as checkUpdate } from '@tauri-apps/plugin-updater'
+import { DownloadEvent, Update } from '@tauri-apps/plugin-updater'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ErrorModalContext } from './error-modal'
@@ -48,21 +48,12 @@ export function UpdaterProvider({ children }: { children: React.ReactNode }) {
 		}
 	}, [partSize])
 
-	useEffect(() => {
-		// Check for new updates
-		async function checkForUpdates() {
-			try {
-				const newUpdate = await checkUpdate()
-				if (newUpdate) {
-					setAvailableUpdate(newUpdate?.available)
-					setUpdate(newUpdate)
-				}
-			} catch (error) {
-				console.error(error)
-			}
-		}
-		checkForUpdates()
-	}, [])
+	// PrivateNote Therapist V1 — upstream auto-updater DISABLED (updater safety slice).
+	// We intentionally do NOT call checkUpdate() so the app never contacts the upstream
+	// thewh1teagle/vibe release feed; otherwise a rebranded build could auto-update back to
+	// upstream Vibe and revert branding/behavior. The updater config (endpoints + pubkey) has
+	// been removed from tauri.conf.json, so `availableUpdate` stays false and the update UI
+	// never surfaces. A PrivateNote-owned updater is a later, separately-reviewed slice.
 
 	async function askForRelaunch() {
 		const shouldRelaunch = await dialog.ask(t('common.ask-for-relaunch-body'), {
