@@ -109,7 +109,7 @@ Medium [post](https://medium.com/@thewh1teagle/creating-vibe-multilingual-audio-
 
 # Issue report
 
-You can open [new issue](https://github.com/thewh1teagle/vibe/issues/new?assignees=octocat&labels=bug&projects=&template=bug_report.yaml&title=[Short+title]) and it's recommend to check [debug.md](docs/debug.md) first.
+Issue reporting is disabled for PrivateNote Therapist V1 (a contact/support channel is pending founder setup). For local diagnostics, see [debug.md](docs/debug.md).
 
 # Privacy Policy 🔒
 
