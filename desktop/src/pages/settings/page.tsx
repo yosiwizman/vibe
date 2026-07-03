@@ -5,11 +5,8 @@ import { InfoTooltip } from '~/components/info-tooltip'
 import { ReactComponent as ChevronLeftIcon } from '~/icons/chevron-left.svg'
 import { ReactComponent as ChevronRightIcon } from '~/icons/chevron-right.svg'
 import { ReactComponent as FolderIcon } from '~/icons/folder.svg'
-import { ReactComponent as GithubIcon } from '~/icons/github.svg'
-import { ReactComponent as HeartIcon } from '~/icons/heart.svg'
 import { ReactComponent as LinkIcon } from '~/icons/link.svg'
 import { ReactComponent as ResetIcon } from '~/icons/reset.svg'
-import { ReactComponent as DiscordIcon } from '~/icons/discord.svg'
 import { ReactComponent as WrenchIcon } from '~/icons/wrench.svg'
 import { ReactComponent as CopyIcon } from '~/icons/copy.svg'
 import * as config from '~/lib/config'
@@ -293,38 +290,6 @@ export default function SettingsPage({ setVisible }: SettingsPageProps) {
 									disabled={!apiDocsUrl}
 									className="h-11 w-full justify-between rounded-lg px-3 font-medium hover:bg-accent/60">
 									Open API docs <LinkIcon className="h-4 w-4 text-muted-foreground" />
-								</Button>
-							</div>
-						</SectionCard>
-					</div>
-
-					<div className="space-y-2">
-						<SectionTitle title={t('common.general')} />
-						<SectionCard>
-							<div className="divide-y divide-border/45 rounded-lg border border-border/55 bg-background/20">
-								<Button
-									variant="ghost"
-									onMouseDown={() => openUrl(config.aboutURL)}
-									className="h-12 w-full justify-between rounded-none px-4 font-medium first:rounded-t-lg last:rounded-b-lg hover:bg-accent/55">
-									{t('common.project-link')} <LinkIcon className="h-4 w-4 text-muted-foreground" />
-								</Button>
-								<Button
-									variant="ghost"
-									onMouseDown={vm.reportIssue}
-									className="h-12 w-full justify-between rounded-none px-4 font-medium first:rounded-t-lg last:rounded-b-lg hover:bg-accent/55">
-									{t('common.report-issue')} <GithubIcon className="h-4 w-4 text-muted-foreground" />
-								</Button>
-								<Button
-									variant="ghost"
-									onMouseDown={() => openUrl(config.supportVibeURL)}
-									className="h-12 w-full justify-between rounded-none px-4 font-medium first:rounded-t-lg last:rounded-b-lg hover:bg-accent/55">
-									{t('common.support-the-project')} <HeartIcon className="h-4 w-4 fill-red-500 text-red-500 dark:fill-red-400 dark:text-red-400" />
-								</Button>
-								<Button
-									variant="ghost"
-									onMouseDown={() => openUrl(config.discordURL)}
-									className="h-12 w-full justify-between rounded-none px-4 font-medium first:rounded-t-lg last:rounded-b-lg hover:bg-accent/55">
-									{t('common.discord-community')} <DiscordIcon className="h-4 w-4 text-muted-foreground" />
 								</Button>
 							</div>
 						</SectionCard>
