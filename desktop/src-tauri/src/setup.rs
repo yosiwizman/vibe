@@ -1,7 +1,6 @@
 use crate::{
     cli::{self, is_cli_detected},
     config::STORE_FILENAME,
-    diagnostics::get_issue_url,
     error::LogError,
     sona::SonaProcess,
 };
@@ -72,12 +71,11 @@ pub fn setup(app: &App) -> Result<(), Box<dyn std::error::Error>> {
             if let Some(app_handle) = STATIC_APP.lock().expect("lock").as_ref() {
                 app_handle
                     .dialog()
-                    .message("App crashed with error. Please register to Github and then click report.")
+                    .message("PrivateNote Therapist crashed unexpectedly. Please restart the app.")
                     .kind(tauri_plugin_dialog::MessageDialogKind::Error)
                     .title("PrivateNote Therapist Crashed")
-                    .buttons(MessageDialogButtons::OkCustom("Report".into()))
+                    .buttons(MessageDialogButtons::Ok)
                     .show(|_| {});
-                let _ = tauri_plugin_opener::open_url(get_issue_url(format!("{:?}", info)), None::<&str>);
             }
 
             crash_handler::CrashEventResult::Handled(true)
