@@ -1,10 +1,10 @@
-# Contributing to Vibe
+# Contributing to PrivateNote Therapist
 
 Thanks for thinking about contributing! 🎉
 
 ## What We Focus On
 
-This repo contains the core Vibe transcription app and examples.  
+This repo contains the core PrivateNote Therapist transcription app and examples.  
 Our goals: improve the app, add useful examples, fix bugs, and keep the codebase minimal and clean.  
 We avoid unnecessary complexity and try to keep things straightforward.
 
