@@ -8,9 +8,8 @@ body:
     - type: markdown
       attributes:
           value: |
-              💚💜 Thank you for interest. ❤️💛
-              *Please prioritize checking existing issues first*. [features](https://github.com/thewh1teagle/vibe/issues?q=is:issue+label:feature+)
-              I will repay with higher-quality code.
+              💚💜 Thank you for your interest. ❤️💛
+              Note: issue reporting is disabled for PrivateNote Therapist V1 (a contact/support channel is pending founder setup).
               
     - type: textarea
       id: describe-the-feature

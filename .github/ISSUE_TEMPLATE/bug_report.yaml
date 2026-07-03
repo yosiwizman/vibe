@@ -9,12 +9,8 @@ body:
       attributes:
           value: |
               Thanks for taking the time to fill out this bug report!
-              One second before you create, search if it's already reported [issues](https://github.com/thewh1teagle/vibe/issues?q=is:issue+label:bug+)
-
-              Please, if possible, just open settings in vibe, and click 'Report Bug'
-              This way I'll get all the relevant info required
-
-              If not reported, if possible please check [Debug.md](https://github.com/thewh1teagle/vibe/blob/main/docs/debug.md) and add comments with more info.
+              Note: issue reporting is disabled for PrivateNote Therapist V1 (a contact/support channel is pending founder setup).
+              For local diagnostics, see docs/debug.md.
 
     - type: textarea
       id: what-happened

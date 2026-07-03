@@ -71,4 +71,4 @@ We may update this Privacy Policy as needed. Any changes will be communicated th
 
 ### 9. Contact Us
 
-If you have any questions or concerns about this Privacy Policy, please reach out via [GitHub Issues](https://github.com/thewh1teagle/vibe/issues).
+If you have any questions or concerns about this Privacy Policy, please note that issue reporting is disabled for PrivateNote Therapist V1 (a contact/support channel is pending founder setup).
