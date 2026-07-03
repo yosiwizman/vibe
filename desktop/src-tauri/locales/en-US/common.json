@@ -9,7 +9,7 @@
 	"ask-for-install-ytdlp-title": "Install ytdlp",
 	"ask-for-relaunch-body": "Do you want to relaunch now?",
 	"ask-for-relaunch-title": "Update Finished",
-	"ask-for-update-body": "Do you want to update PrivateNote Therapist into version {{version}}?",
+	"ask-for-update-body": "Do you want to update PrivateNote Therapist to version {{version}}?",
 	"ask-for-update-title": "Confirm update",
 	"ask-for-update-ytdlp-message": "New ytdlp version found. Do you want to update ytdlp?",
 	"ask-for-update-ytdlp-title": "Update ytdlp",

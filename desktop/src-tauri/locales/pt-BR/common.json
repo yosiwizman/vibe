@@ -121,7 +121,7 @@
 	"replace-all": "Substitua tudo",
 	"report-issue": "Relatar problema",
 	"reset-app": "Redefinir PrivateNote Therapist",
-	"reset-ask-dialog": "ATem certeza de que deseja redefinir o PrivateNote Therapist? Os dados do aplicativo serão apagados, inclusive os arquivos de modelos",
+	"reset-ask-dialog": "Tem certeza de que deseja redefinir o PrivateNote Therapist? Os dados do aplicativo serão apagados, inclusive os arquivos de modelos",
 	"reset-options": "Restaurar opções padrão",
 	"right-alignment": "Alinhamento à direita",
 	"run-llm-check": "Executar verificação",
