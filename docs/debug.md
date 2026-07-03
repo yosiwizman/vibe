@@ -113,4 +113,4 @@ For `vulkan-1.dll` install [VulkanRT-Installer.exe](https://sdk.lunarg.com/sdk/d
 
 </details>
 
-After you finished, share you results by opening [new issue](https://github.com/thewh1teagle/vibe/issues/new?assignees=octocat&labels=bug&projects=&template=bug_report.yaml&title=[Short+title]) or just comment in the issue.
+After you finish, keep your results locally. Issue reporting is disabled for PrivateNote Therapist V1 (a contact/support channel is pending founder setup).
