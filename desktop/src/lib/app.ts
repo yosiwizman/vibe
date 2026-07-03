@@ -24,10 +24,10 @@ export async function resetApp() {
 	}
 }
 
-export async function getIssueUrl(logs: string) {
-	return `https://github.com/thewh1teagle/vibe/issues/new?assignees=octocat&labels=bug&projects=&template=bug_report.yaml&title=App+reports+bug+&logs=${encodeURIComponent(
-		logs,
-	)}`
+export async function getIssueUrl(_logs: string): Promise<string> {
+	// PrivateNote Therapist V1: upstream issue reporting is disabled. Do not open the
+	// upstream thewh1teagle/vibe issue tracker. Returns an empty string; callers no-op on empty.
+	return ''
 }
 
 export async function openPath(path: NamedPath) {
