@@ -1,6 +1,6 @@
-# 🌟 Vibe Models 🌟
+# 🌟 PrivateNote Therapist Models 🌟
 
-Welcome to the Vibe Models page! Here you can find a curated list of suggested models to use with Vibe. To install a model, use the "Magic Setup" link to open it in Vibe, or copy and paste the direct download link in Vibe settings.
+Welcome to the PrivateNote Therapist Models page! Here you can find a curated list of suggested models to use with PrivateNote Therapist. To install a model, use the "Magic Setup" link to open it in PrivateNote Therapist, or copy and paste the direct download link in PrivateNote Therapist settings.
 
 ## Available Models
 
@@ -82,7 +82,7 @@ Find the size you want, download the _ggml-model.bin_ file, rename the file, and
 </details>
 </details>
 
-Enjoy exploring these models and enhancing your Vibe! 🌐✨
+Enjoy exploring these models and enhancing your PrivateNote Therapist! 🌐✨
 
 ### Want More?
 

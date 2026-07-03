@@ -1,11 +1,11 @@
-# Troubleshoot vibe crash / error
+# Troubleshoot PrivateNote Therapist crash / error
 
 Try the following, the more you try the better the chance we'll find the cause :)
 
 1. Is the audio file valid? try with different one, eg. download [vibe/samples/single.wav](https://github.com/thewh1teagle/vibe/raw/main/samples/single.wav)
 2. Do you have errors? report it with the 'report button'
 3. Do you experience crash without errors? try to run from the terminal with logs enabled:
-4. Do you use other model than the default one? Please use the default one that comes with Vibe when checking.
+4. Do you use other model than the default one? Please use the default one that comes with PrivateNote Therapist when checking.
 
 <details>
 <summary>Windows</summary>

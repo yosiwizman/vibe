@@ -1,8 +1,8 @@
-# Vibe Architecture
+# PrivateNote Therapist Architecture
 
 ## Overview
 
-Vibe is a desktop transcription app built with **Tauri** (Rust + TypeScript frontend).
+PrivateNote Therapist is a desktop transcription app built with **Tauri** (Rust + TypeScript frontend).
 
 ## Components
 

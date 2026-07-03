@@ -2,7 +2,7 @@
   <a target="blank" href="https://github.com/thewh1teagle/vibe">
     <img
         width="96px"
-        alt="Vibe logo"
+        alt="PrivateNote Therapist logo"
         src="./design/logo.png"
     />
   </a>
@@ -54,7 +54,7 @@
 - ⚙️ Model arguments for advanced users
 - ⏳ Transcribe system audio
 - 🎤 Transcribe from microphone
-- 🖥️ CLI support: Use Vibe directly from the command line interface! (see `--help`)
+- 🖥️ CLI support: Use PrivateNote Therapist directly from the command line interface! (see `--help`)
 - 👥 Speaker diarization
 - 🎬 Stable timestamps mode for subtitle/movie-grade timing (VAD-backed, slower)
 - 📱 ~iOS & Android support~ (coming soon)
