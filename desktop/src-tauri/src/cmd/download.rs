@@ -35,11 +35,22 @@ fn verify_model_sha256(path: &str, expected: &str) -> Result<()> {
     let expected = expected.trim().to_lowercase();
     let actual = sha256_file(path)?;
     if actual != expected {
-        let _ = std::fs::remove_file(path);
         tracing::error!("Model hash mismatch for {}: expected {}, got {}", path, expected, actual);
-        eyre::bail!(
-            "Downloaded model failed integrity check (SHA256 mismatch); the bad file was deleted. Please try again."
-        );
+        // Delete the bad file, but only claim it was deleted if the removal actually succeeded — a
+        // permission/lock failure must not be reported as a clean deletion.
+        match std::fs::remove_file(path) {
+            Ok(()) => eyre::bail!(
+                "Downloaded model failed integrity check (SHA256 mismatch); the bad file was deleted. Please try again."
+            ),
+            Err(e) => {
+                tracing::error!("Failed to delete bad model file {}: {}", path, e);
+                eyre::bail!(
+                    "Downloaded model failed integrity check (SHA256 mismatch). The bad file could NOT be removed automatically ({}); please delete it manually and try again: {}",
+                    e,
+                    path
+                )
+            }
+        }
     }
     tracing::info!("Model SHA256 verified for {}", path);
     Ok(())

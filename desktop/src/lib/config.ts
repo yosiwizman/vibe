@@ -21,7 +21,9 @@ export const modelUrls = {
 // Expected SHA256 fingerprints, keyed by download URL. Only the primary model is enforced in this
 // scope (verified HIGH-confidence against upstream Git-LFS metadata + the on-disk file). A URL absent
 // from this map is downloaded without hash enforcement (non-primary models are out of scope here).
-export const modelSha256: Record<string, string> = {
+// `string | undefined` value type makes the sparse nature explicit: indexing by an arbitrary URL may
+// return undefined (most models have no entry), which callers treat as "no enforcement".
+export const modelSha256: Record<string, string | undefined> = {
 	[primaryModelUrl]: '1fc70f774d38eb169993ac391eea357ef47c88757ef72ee5943879b7e8e2bc69',
 }
 
