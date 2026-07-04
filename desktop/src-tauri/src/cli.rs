@@ -83,7 +83,7 @@ pub async fn run(app_handle: &AppHandle) -> Result<()> {
     let _ = stderr_thread.join();
 
     // Only flush analytics if Aptabase is actually configured. When it is not (the default —
-    // empty APTABASE_APP_KEY/BASE_URL), the aptabase plugin is never registered/managed, so
+    // empty APTABASE_APP_KEY / APTABASE_BASE_URL), the aptabase plugin is never registered/managed, so
     // flush_events_blocking() would call state::<AptabaseClient>() on unmanaged state and panic
     // on clean exit (after the transcript is already printed). Guarding it keeps unconfigured
     // telemetry a safe no-op; it does NOT enable telemetry or change the configured behavior.
