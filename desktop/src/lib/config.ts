@@ -4,12 +4,27 @@ export const storeFilename = 'app_config.json'
 export const latestReleaseURL = 'https://github.com/thewh1teagle/vibe/releases/latest'
 export const latestVersionWithoutVulkan = 'https://github.com/thewh1teagle/vibe/releases/download/v2.4.0/vibe_2.4.0_x64-setup.exe'
 
+// Primary model is pinned to a fixed Hugging Face commit (immutable) rather than the mutable
+// `resolve/main` ref, so the downloaded bytes can never change under us and can be integrity-checked
+// against a known SHA256. Commit verified in handoff/lane_reports/lane_model_hash_evidence_rebuild_run25.md.
+export const primaryModelUrl =
+	'https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3-turbo.bin'
+
 export const modelUrls = {
 	default: [
-		'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo.bin',
-		'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium.bin', // Fallback
+		primaryModelUrl,
+		'https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium.bin', // Fallback (non-primary; not pinned/verified in this scope)
 	],
 	hebrew: ['https://huggingface.co/ivrit-ai/whisper-large-v3-turbo-ggml/resolve/main/ggml-model.bin'],
+}
+
+// Expected SHA256 fingerprints, keyed by download URL. Only the primary model is enforced in this
+// scope (verified HIGH-confidence against upstream Git-LFS metadata + the on-disk file). A URL absent
+// from this map is downloaded without hash enforcement (non-primary models are out of scope here).
+// `string | undefined` value type makes the sparse nature explicit: indexing by an arbitrary URL may
+// return undefined (most models have no entry), which callers treat as "no enforcement".
+export const modelSha256: Record<string, string | undefined> = {
+	[primaryModelUrl]: '1fc70f774d38eb169993ac391eea357ef47c88757ef72ee5943879b7e8e2bc69',
 }
 
 export const embeddingModelFilename = 'wespeaker_en_voxceleb_CAM++.onnx'

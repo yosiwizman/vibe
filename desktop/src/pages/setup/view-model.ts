@@ -71,7 +71,9 @@ export function viewModel() {
 			for (const url of urls) {
 				try {
 					console.log(`[model] Attempting to download from: ${url}`)
-					const path = await utils.downloadModel(url)
+					// Enforce the known SHA256 for the pinned primary model; other URLs have no entry
+					// and download without hash enforcement (out of scope here).
+					const path = await utils.downloadModel(url, config.modelSha256[url])
 					if (path) {
 						console.log(`[model] Download succeeded: ${path}`)
 						preference.setModelPath(path)
