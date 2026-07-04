@@ -1,5 +1,4 @@
 export const updateVersionURL = 'https://github.com/thewh1teagle/vibe/releases/latest'
-export const modelsDocURL = 'https://thewh1teagle.github.io/vibe/docs#models'
 export const unsupportedCpuReadmeURL = 'https://thewh1teagle.github.io/vibe/docs#install'
 export const storeFilename = 'app_config.json'
 export const latestReleaseURL = 'https://github.com/thewh1teagle/vibe/releases/latest'
