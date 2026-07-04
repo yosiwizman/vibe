@@ -82,7 +82,14 @@ pub async fn run(app_handle: &AppHandle) -> Result<()> {
     let _ = stdout_thread.join();
     let _ = stderr_thread.join();
 
-    app_handle.flush_events_blocking();
+    // Only flush analytics if Aptabase is actually configured. When it is not (the default —
+    // empty APTABASE_APP_KEY/BASE_URL), the aptabase plugin is never registered/managed, so
+    // flush_events_blocking() would call state::<AptabaseClient>() on unmanaged state and panic
+    // on clean exit (after the transcript is already printed). Guarding it keeps unconfigured
+    // telemetry a safe no-op; it does NOT enable telemetry or change the configured behavior.
+    if crate::analytics::is_aptabase_configured() {
+        app_handle.flush_events_blocking();
+    }
     app_handle.cleanup_before_exit();
     process::exit(status.code().unwrap_or(1));
 }
