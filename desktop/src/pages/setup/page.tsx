@@ -35,7 +35,7 @@ function App() {
 									defaultValue: 'A speech-to-text model is required and will be downloaded once. This is a large download.',
 								})}
 							</p>
-							<Button onClick={vm.downloadModel}>{t('common.start-model-download', { defaultValue: 'Download model' })}</Button>
+							<Button onClick={vm.downloadModel} disabled={vm.isDownloading}>{t('common.start-model-download', { defaultValue: 'Download model' })}</Button>
 						</>
 					)}
 					{(vm.isOnline === null || (vm.downloadProgress === 0 && !!vm?.location?.state?.downloadURL)) && <Spinner className="h-8 w-8" />}

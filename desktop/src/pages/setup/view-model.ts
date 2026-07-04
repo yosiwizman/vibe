@@ -17,6 +17,7 @@ export function viewModel() {
 	const navigate = useNavigate()
 	const preference = usePreferenceProvider()
 	const [modelCompany, setModelCompany] = useState('OpenAI')
+	const [isDownloading, setIsDownloading] = useState(false)
 
 	function handleProgressEvenets() {
 		listen('download_progress', (event) => {
@@ -34,6 +35,12 @@ export function viewModel() {
 	}
 
 	async function downloadModel() {
+		// In-flight guard: ignore repeated clicks before the first progress event so we never start
+		// concurrent downloads or register duplicate progress listeners.
+		if (isDownloading) {
+			return
+		}
+		setIsDownloading(true)
 		handleProgressEvenets()
 
 		let lastError = null
@@ -81,20 +88,30 @@ export function viewModel() {
 		} catch (err) {
 			console.error(`[model] Unhandled error:`, err)
 			setErrorModal?.({ open: true, log: String(err) })
+		} finally {
+			// Allow a retry after a failed/aborted download (on success we've already navigated away).
+			setIsDownloading(false)
 		}
 	}
 
 	async function downloadIfOnline() {
-		// Check if online
-		const isOnlineResponse = await invoke<boolean>('is_online')
-		// Update UI first
-		setIsOnline(isOnlineResponse)
-		// First-run download guard: do NOT auto-start the large model download. Only auto-download
-		// when the user explicitly chose a specific model (e.g. a "Magic Setup" deep link supplies a
-		// downloadURL). On the default first run the user must click Download (see setup/page.tsx),
-		// so the app never silently pulls a large model on launch.
-		if (isOnlineResponse && location?.state?.downloadURL) {
-			downloadModel()
+		try {
+			// Check if online
+			const isOnlineResponse = await invoke<boolean>('is_online')
+			// Update UI first
+			setIsOnline(isOnlineResponse)
+			// First-run download guard: do NOT auto-start the large model download. Only auto-download
+			// when the user explicitly chose a specific model (e.g. a "Magic Setup" deep link supplies a
+			// downloadURL). On the default first run the user must click Download (see setup/page.tsx),
+			// so the app never silently pulls a large model on launch.
+			if (isOnlineResponse && location?.state?.downloadURL) {
+				void downloadModel()
+			}
+		} catch (err) {
+			// If the connectivity check itself fails, don't leave the UI stuck on the spinner —
+			// treat it as offline so the user gets the retry / manual-setup path.
+			console.error('[setup] is_online check failed:', err)
+			setIsOnline(false)
 		}
 	}
 
@@ -117,6 +134,7 @@ export function viewModel() {
 		downloadProgress,
 		downloadIfOnline,
 		downloadModel,
+		isDownloading,
 		setDownloadProgress,
 		downloadProgressRef,
 		isOnline,
