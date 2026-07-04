@@ -1,6 +1,5 @@
 import { invoke } from '@tauri-apps/api/core'
 import { ask, open } from '@tauri-apps/plugin-dialog'
-import { openUrl } from '@tauri-apps/plugin-opener'
 import { platform } from '@tauri-apps/plugin-os'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -28,9 +27,6 @@ async function openModelPath() {
 	invoke('open_path', { path: dst })
 }
 
-async function openModelsUrl() {
-	openUrl(config.modelsDocURL)
-}
 
 async function revealLogs() {
 	await invoke<string>('show_log_path')
@@ -213,7 +209,6 @@ export function viewModel() {
 		preference: preference,
 		askAndReset,
 		openModelPath,
-		openModelsUrl,
 		revealLogs,
 		revealTemp,
 		models,
