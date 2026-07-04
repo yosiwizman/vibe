@@ -87,12 +87,15 @@ export function viewModel() {
 	async function downloadIfOnline() {
 		// Check if online
 		const isOnlineResponse = await invoke<boolean>('is_online')
-		// If online download model
-		if (isOnlineResponse) {
+		// Update UI first
+		setIsOnline(isOnlineResponse)
+		// First-run download guard: do NOT auto-start the large model download. Only auto-download
+		// when the user explicitly chose a specific model (e.g. a "Magic Setup" deep link supplies a
+		// downloadURL). On the default first run the user must click Download (see setup/page.tsx),
+		// so the app never silently pulls a large model on launch.
+		if (isOnlineResponse && location?.state?.downloadURL) {
 			downloadModel()
 		}
-		// Update UI
-		setIsOnline(isOnlineResponse)
 	}
 
 	async function cancelSetup() {
@@ -113,6 +116,7 @@ export function viewModel() {
 		setErrorModal,
 		downloadProgress,
 		downloadIfOnline,
+		downloadModel,
 		setDownloadProgress,
 		downloadProgressRef,
 		isOnline,
