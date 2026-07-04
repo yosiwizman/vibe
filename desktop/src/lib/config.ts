@@ -11,9 +11,9 @@ export const primaryModelUrl =
 	'https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3-turbo.bin'
 
 // Non-primary Whisper models that flow through the setup download path are also pinned to fixed Hugging
-// Face commits + verified fingerprints (same mechanism as the primary). Commits/SHA256 verified via
-// Git-LFS metadata in handoff/lane_reports/lane_non_primary_model_integrity_classification_run27.md
-// (medium lives at the same commit as the primary; hebrew's commit is its current main x-repo-commit).
+// Face commits + verified fingerprints (same mechanism as the primary). Each commit + SHA256 was verified
+// against the upstream Git-LFS pointer metadata (medium lives at the same commit as the primary; hebrew's
+// commit is its current main x-repo-commit at the time of pinning).
 export const mediumFallbackModelUrl =
 	'https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-medium.bin'
 export const hebrewModelUrl =
