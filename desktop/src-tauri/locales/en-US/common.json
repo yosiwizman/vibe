@@ -156,7 +156,7 @@
 	"run-llm-check": "Run check",
 	"save-record-in-documents-folder": "Save audio file in documents",
 	"recording-save-path": "Recording Save Path",
-	"recording-save-path-info": "Choose where to save recorded audio files. Default is Documents/Vibe.",
+	"recording-save-path-info": "Choose where to save recorded audio files. Defaults to a PrivateNote Therapist folder in your Documents.",
 	"change-recording-path": "Change",
 	"reset-to-default": "Reset",
 	"save-success": "Saved Successfully!",
