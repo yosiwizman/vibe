@@ -16,7 +16,7 @@ export async function getFilenameFromUrl(url: string) {
 	return fileName
 }
 
-export async function downloadModel(url: string) {
+export async function downloadModel(url: string, expectedSha256?: string) {
 	let filename = await getFilenameFromUrl(url)
 	if (!filename.endsWith('.bin')) {
 		filename = 'ggml-model.bin'
@@ -27,6 +27,8 @@ export async function downloadModel(url: string) {
 		filename = randomString(8, 'ggml-model_', '.bin')
 		modelPath = await pathExt.join(modelsFolder, filename)
 	}
-	await invoke('download_model', { url, path: modelPath })
+	// When an expected fingerprint is supplied (primary model only), the Rust side verifies the
+	// downloaded bytes and deletes the file on mismatch, so a corrupted/tampered download never wins.
+	await invoke('download_model', { url, path: modelPath, expectedSha256 })
 	return modelPath
 }
