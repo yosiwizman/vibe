@@ -8,9 +8,17 @@
 name: PrivateNote Windows Unsigned Artifact
 
 on:
+  # Always available for on-demand baseline builds.
   workflow_dispatch:
+  # On PRs to the integration branch, only run when app/build inputs change — not on docs-only PRs.
   pull_request:
-    branches: [harness/baseline-v3.0.19]
+    branches:
+      - harness/baseline-v3.0.19
+    paths:
+      - ".github/workflows/private-note-windows-unsigned.yml"
+      - "desktop/**"
+      - "scripts/pre_build.py"
+      - "Cargo.lock"
 
 # Least privilege: read-only; no release/publish permissions.
 permissions:
