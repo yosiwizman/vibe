@@ -59,8 +59,9 @@ jobs:
       - name: Locate built artifact
         shell: pwsh
         run: |
-          Write-Host "Searching for vibe.exe under target/ ..."
-          Get-ChildItem -Path . -Recurse -Filter vibe.exe -ErrorAction SilentlyContinue |
+          Write-Host "Searching for vibe.exe under the Tauri target directories ..."
+          $roots = @('target', 'desktop/src-tauri/target') | Where-Object { Test-Path $_ }
+          Get-ChildItem -Path $roots -Recurse -Filter vibe.exe -ErrorAction SilentlyContinue |
             Where-Object { $_.FullName -match "release" } |
             ForEach-Object { Write-Host "FOUND: $($_.FullName)  ($([math]::Round($_.Length/1MB,1)) MB)" }
 
@@ -72,5 +73,6 @@ jobs:
             target/release/vibe.exe
             desktop/src-tauri/target/release/vibe.exe
             target/x86_64-pc-windows-msvc/release/vibe.exe
-          if-no-files-found: warn
+          # Fail the job if no binary was produced — an empty artifact would be a false-green CI proof.
+          if-no-files-found: error
           retention-days: 7
