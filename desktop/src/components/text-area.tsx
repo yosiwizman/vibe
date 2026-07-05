@@ -2,8 +2,9 @@ import * as dialog from '@tauri-apps/plugin-dialog'
 import * as fs from '@tauri-apps/plugin-fs'
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { AlignRight, Check, Copy, Download, Printer } from 'lucide-react'
+import { AlignRight, Check, Copy, Download, FolderDown, Printer } from 'lucide-react'
 import { Segment, asCsv, asJson, asSrt, asText, asVtt } from '~/lib/transcript'
+import { exportTherapistPackage } from '~/lib/therapist-export'
 import { NamedPath } from '~/lib/types'
 import { openPath } from '~/lib/app'
 import { cn } from '~/lib/style'
@@ -133,6 +134,41 @@ export default function TextArea({
 		})
 	}
 
+	// Therapist Export Package v1: write a therapist-friendly LOCAL folder around the transcript
+	// (transcript + session info + review checklist + BLANK SOAP template + privacy reminder). No clinical
+	// notes are generated; the transcript stays the source of truth. Additive — the plain-text export above
+	// is unchanged.
+	async function exportTherapistPackageHandler() {
+		if (!segments || segments.length === 0) {
+			toast.error(t('common.no-transcript-yet', { defaultValue: 'Transcribe something first.' }))
+			return
+		}
+		const parentDir = await dialog.open({ multiple: false, directory: true })
+		if (!parentDir || typeof parentDir !== 'string') return
+		const now = new Date()
+		const pad = (n: number) => (n < 10 ? `0${n}` : `${n}`)
+		const dateTimeLabel = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`
+		try {
+			const folderPath = await exportTherapistPackage(parentDir, {
+				transcript: asText(segments, speakerLabel),
+				srt: asSrt(segments, speakerLabel),
+				session: {
+					sourceFileName: file?.name || undefined,
+					modelName: preference.modelPath?.split(/[\\/]/).pop() || undefined,
+					dateTimeLabel,
+					transcriptFormat: 'plain text (normal)',
+				},
+			}, now)
+			toast.success(t('common.therapist-package-saved', { defaultValue: 'Therapist package saved' }), {
+				position: 'bottom-center',
+				action: { label: t('common.find-here'), onClick: () => openPath({ name: '', path: folderPath }) },
+			})
+		} catch (e) {
+			console.error('therapist package export failed', e)
+			toast.error(t('common.save-failed', { defaultValue: 'Could not save the package.' }))
+		}
+	}
+
 	return (
 		<div className="flex h-full w-full min-w-0 flex-col overflow-hidden">
 			<div className="flex w-full shrink-0 flex-wrap items-center gap-1 rounded-tl-lg rounded-tr-lg bg-muted p-1">
@@ -145,6 +181,17 @@ export default function TextArea({
 						</Button>
 					</TooltipTrigger>
 					<TooltipContent>{t('common.save-transcript')}</TooltipContent>
+				</Tooltip>
+
+				<Tooltip>
+					<TooltipTrigger asChild>
+						<Button variant="ghost" size="icon" onMouseDown={exportTherapistPackageHandler}>
+							<FolderDown className="h-5 w-5" strokeWidth={2.1} />
+						</Button>
+					</TooltipTrigger>
+					<TooltipContent>
+						{t('common.export-therapist-package', { defaultValue: 'Export therapist package (folder)' })}
+					</TooltipContent>
 				</Tooltip>
 
 				{['html', 'pdf'].includes(textFormat) && (

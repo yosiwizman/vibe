@@ -26,6 +26,7 @@
     "fs:allow-read-dir",
     "fs:allow-read-text-file",
     "fs:allow-app-write",
+    "fs:allow-mkdir",
     "os:allow-arch",
     "os:allow-platform",
     "os:allow-version",
