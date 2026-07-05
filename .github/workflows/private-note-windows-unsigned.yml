@@ -18,6 +18,7 @@ on:
       - ".github/workflows/private-note-windows-unsigned.yml"
       - "desktop/**"
       - "scripts/pre_build.py"
+      - ".sona-version" # pre_build.py reads this to pick sidecar (sona/ffmpeg) versions
       - "Cargo.lock"
 
 # Least privilege: read-only; no release/publish permissions.
