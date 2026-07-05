@@ -43,7 +43,10 @@ export const SOAP_TEMPLATE_BLANK = `# SOAP Note (blank template — fill in manu
 
 export const README_PRIVACY = `PrivateNote Therapist — Export Package (privacy reminder)
 
-- These files are LOCAL to your computer. Nothing was uploaded; transcription runs on-device.
+- These files are written LOCALLY to your computer, and speech-to-text transcription runs on-device.
+- Note: the app may include optional features (e.g. AI summarization) that can send text to a third-party
+  provider if you enable and use them. This transcript-export package itself does not upload anything, but
+  review your own app settings/usage if off-device processing matters to you.
 - This is a transcription tool, NOT a compliance product: it is not HIPAA-compliant, not medical-grade,
   not legally compliant, and not attorney-client privileged. It does not provide diagnosis, treatment,
   billing, or clinical-note automation.
@@ -78,14 +81,16 @@ function pad(n: number): string {
 	return n < 10 ? `0${n}` : `${n}`
 }
 
-// Folder name: "PrivateNote Therapist Export - YYYY-MM-DD HHMM".
+// Folder name: "PrivateNote Therapist Export - YYYY-MM-DD HHMMSS".
+// Seconds are included so exporting twice within the same minute produces distinct folders (no overwrite).
 export function packageFolderName(now: Date): string {
 	const y = now.getFullYear()
 	const m = pad(now.getMonth() + 1)
 	const d = pad(now.getDate())
 	const hh = pad(now.getHours())
 	const mm = pad(now.getMinutes())
-	return `PrivateNote Therapist Export - ${y}-${m}-${d} ${hh}${mm}`
+	const ss = pad(now.getSeconds())
+	return `PrivateNote Therapist Export - ${y}-${m}-${d} ${hh}${mm}${ss}`
 }
 
 function sessionInfoText(s: TherapistSessionInfo): string {
