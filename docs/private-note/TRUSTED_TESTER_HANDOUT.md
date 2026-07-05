@@ -7,7 +7,7 @@ redistribute it.
 A private, offline transcription app for macOS (Apple silicon). Audio never leaves your computer.
 
 ## Install / open
-1. Copy `PrivateNote Therapist.app` to `/Applications` (or anywhere).
+1. Copy `PrivateNote Therapist.app` to your **Applications** folder (or anywhere).
 2. **First open:** right-click (Control-click) the app → **Open** → **Open**. (Unsigned apps are blocked on a
    plain double-click.)
 3. If prompted on first run, choose **Download** to fetch the speech model (~1.5 GB, one time). Nothing

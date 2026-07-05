@@ -28,7 +28,7 @@ Plain text (`.txt`) is the default. Other formats (e.g. `.srt`) are available in
 Recordings stay on your computer. Transcription runs on-device/offline — nothing is uploaded for
 transcription.
 
-## Not claims
+## Not a compliance product
 This is a transcription tool. It is **not** HIPAA-compliant, medical-grade, legally compliant, or
 attorney-client safe, and it does **not** provide diagnosis, treatment, billing, or clinical-note automation.
 

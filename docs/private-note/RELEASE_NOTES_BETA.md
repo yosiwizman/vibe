@@ -17,7 +17,7 @@ Private, offline transcription for macOS (Apple silicon) and Windows (x64).
 - Local trusted-tester beta only; not a public release.
 - Tested with synthetic audio only.
 
-### Not claims
+### Not a compliance product
 Not HIPAA-compliant, medical-grade, legally compliant, or attorney-client safe; no diagnosis/treatment/
 billing or clinical-note automation.
 
