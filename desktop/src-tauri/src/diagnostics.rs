@@ -29,4 +29,3 @@ pub fn get_app_info() -> String {
 
     info
 }
-
