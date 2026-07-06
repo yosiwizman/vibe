@@ -222,9 +222,6 @@ mod tests {
         let expected = "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad";
         let result = verify_model_sha256(&path, expected);
         assert!(result.is_err(), "mismatch must return an error");
-        assert!(
-            !std::path::Path::new(&path).exists(),
-            "bad file must be deleted on mismatch"
-        );
+        assert!(!std::path::Path::new(&path).exists(), "bad file must be deleted on mismatch");
     }
 }
